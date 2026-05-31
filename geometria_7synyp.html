@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Геометрия 7-сынып | Үшбұрыштар</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e8f4fd;--bg2:#d0eaf8;--card:#fff;--card2:#f0f8ff;
+  --text:#1a3a5c;--text2:#2c5f8a;
+  --accent:#1e90ff;--accent2:#00bfff;--accent3:#5dade2;
+  --nav:#0d47a1;--border:rgba(30,144,255,.2);
+  --shadow:0 6px 24px rgba(30,144,255,.13);
+  --ok:#1e8449;--err:#c0392b;--sidebar:260px;
+}
+body.dark{
+  --bg:#0d1b2a;--bg2:#0a1520;--card:#112233;--card2:#0f1e30;
+  --text:#cce8ff;--text2:#90caf9;
+  --nav:#051220;--border:rgba(66,165,245,.2);
+  --shadow:0 6px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;transition:background .35s,color .35s;}
+.sidebar{
+  width:var(--sidebar);background:linear-gradient(175deg,#0d47a1 0%,#1565c0 50%,#1976d2 100%);
+  position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:200;
+  display:flex;flex-direction:column;box-shadow:3px 0 18px rgba(0,0,0,.2);
+}
+.sb-logo{padding:22px 18px 14px;border-bottom:1px solid rgba(255,255,255,.1);}
+.sb-logo h1{font-family:'Baloo 2',cursive;color:#fff;font-size:1.25rem;display:flex;align-items:center;gap:8px;}
+.sb-logo small{color:rgba(255,255,255,.5);font-size:.7rem;font-weight:700;letter-spacing:.6px;display:block;margin-top:2px;}
+.sb-search{padding:10px 12px;background:rgba(0,0,0,.15);position:relative;}
+.sb-search input{
+  width:100%;padding:8px 34px 8px 11px;border:none;border-radius:8px;
+  background:rgba(255,255,255,.14);color:#fff;font-family:'Nunito',sans-serif;font-size:.82rem;outline:none;
+}
+.sb-search input::placeholder{color:rgba(255,255,255,.45);}
+.sb-search .s-icon{position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:.9rem;cursor:pointer;color:rgba(255,255,255,.6);}
+.s-panel{
+  display:none;position:absolute;left:8px;right:8px;top:calc(100% + 2px);
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  box-shadow:var(--shadow);max-height:300px;overflow-y:auto;z-index:999;
+}
+.s-item{padding:9px 13px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
+.s-item:last-child{border-bottom:none;}
+.s-item:hover{background:var(--bg2);}
+.s-item b{display:block;font-size:.8rem;color:var(--accent);margin-bottom:2px;}
+.s-item span{font-size:.74rem;color:var(--text2);}
+mark{background:#ffe066;color:#333;border-radius:2px;padding:0 1px;}
+.sb-nav{padding:8px 10px;flex:1;}
+.acc{border-radius:10px;overflow:hidden;margin-bottom:4px;}
+.acc-hd{
+  display:flex;align-items:center;gap:8px;padding:10px 12px;
+  color:rgba(255,255,255,.9);font-weight:700;font-size:.84rem;
+  cursor:pointer;border-radius:10px;transition:background .18s;user-select:none;
+}
+.acc-hd:hover{background:rgba(255,255,255,.12);}
+.acc-hd .ico{font-size:1rem;flex-shrink:0;}
+.acc-hd .lbl{flex:1;}
+.acc-hd .arr{font-size:.62rem;opacity:.7;transition:transform .3s;}
+.acc.open .arr{transform:rotate(180deg);}
+.acc-bd{max-height:0;overflow:hidden;transition:max-height .32s ease;background:rgba(0,0,0,.18);border-radius:0 0 10px 10px;}
+.acc.open .acc-bd{max-height:700px;}
+.acc-lnk{
+  display:block;padding:7px 12px 7px 28px;color:rgba(255,255,255,.6);
+  text-decoration:none;font-size:.78rem;font-weight:600;
+  border-left:2px solid transparent;transition:all .16s;
+}
+.acc-lnk:hover{color:#fff;border-left-color:#64b5f6;padding-left:32px;}
+.sb-lnk{
+  display:block;padding:10px 12px;color:rgba(255,255,255,.82);
+  font-size:.84rem;font-weight:700;border-radius:10px;margin:3px 0;
+  text-decoration:none;transition:background .18s;
+}
+.sb-lnk:hover{background:rgba(255,255,255,.12);color:#fff;}
+.sb-foot{padding:12px 10px;border-top:1px solid rgba(255,255,255,.07);}
+.btn-mode{
+  width:100%;padding:10px;background:rgba(255,255,255,.1);color:#fff;
+  border:1px solid rgba(255,255,255,.18);border-radius:10px;cursor:pointer;
+  font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;transition:background .2s;
+}
+.btn-mode:hover{background:rgba(255,255,255,.2);}
+.content{margin-left:var(--sidebar);padding:28px 32px 60px;max-width:960px;width:100%;}
+.hero{
+  background:linear-gradient(135deg,#1565c0 0%,#1e90ff 55%,#00bfff 100%);
+  border-radius:18px;padding:34px 36px 28px;margin-bottom:24px;color:#fff;
+  position:relative;overflow:hidden;box-shadow:0 10px 36px rgba(30,144,255,.3);
+}
+.hero h1{font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;margin-bottom:6px;}
+.hero p{font-size:.95rem;opacity:.88;font-weight:600;}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;}
+.tag{background:rgba(255,255,255,.2);color:#fff;padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:700;}
+.card{
+  background:var(--card);border-radius:16px;padding:26px;margin-bottom:22px;
+  box-shadow:var(--shadow);border:1px solid var(--border);position:relative;overflow:hidden;
+}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.ch{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:13px;border-bottom:2px solid var(--border);}
+.ch-ico{
+  width:42px;height:42px;border-radius:11px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  box-shadow:0 4px 12px rgba(30,144,255,.3);
+}
+.ch h2{font-family:'Baloo 2',cursive;font-size:1.18rem;font-weight:800;color:var(--text);}
+.tb{
+  background:var(--card2);border-radius:12px;padding:18px 20px;
+  margin-bottom:14px;border-left:4px solid var(--accent);
+}
+.tb h3{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.tb p,.tb li{color:var(--text2);font-size:.88rem;line-height:1.75;}
+.tb ul,.tb ol{padding-left:18px;}
+.tb li{margin-bottom:4px;}
+.tb strong{color:var(--text);font-weight:800;}
+.formula{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;
+  padding:13px 18px;border-radius:10px;font-weight:800;font-size:.95rem;
+  text-align:center;margin:12px 0;box-shadow:0 4px 14px rgba(30,144,255,.25);
+  font-family:'Baloo 2',cursive;letter-spacing:.3px;
+}
+.igrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0;}
+.itile{
+  background:var(--card);border:2px solid var(--border);border-radius:10px;
+  padding:12px 10px;text-align:center;transition:all .2s;cursor:default;
+}
+.itile:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow);}
+.itile .tico{font-size:1.6rem;margin-bottom:5px;}
+.itile .tnm{font-weight:800;font-size:.82rem;color:var(--text);}
+.itile .tds{font-size:.72rem;color:var(--text2);margin-top:3px;}
+.diag{background:var(--card2);border-radius:12px;padding:14px;margin:12px 0;text-align:center;border:1px solid var(--border);}
+.diag svg{max-width:100%;height:auto;}
+.diag figcaption{font-size:.75rem;color:var(--text2);margin-top:5px;font-style:italic;}
+.tbl{width:100%;border-collapse:collapse;font-size:.83rem;margin-top:10px;}
+.tbl th{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:9px 12px;text-align:left;font-weight:700;}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text2);}
+.tbl tr:nth-child(even) td{background:rgba(30,144,255,.04);}
+body.dark .tbl tr:nth-child(even) td{background:rgba(255,255,255,.04);}
+.ptask{
+  background:var(--card2);border-radius:11px;padding:14px 16px;margin-bottom:10px;
+  border:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;
+}
+.ptask .pn{
+  width:30px;height:30px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.85rem;flex-shrink:0;
+}
+.ptask .pb p{font-size:.86rem;color:var(--text2);line-height:1.65;}
+.ptask .pb strong{color:var(--text);font-weight:800;}
+.ptask .pb .ans{
+  display:none;margin-top:8px;padding:8px 12px;background:rgba(30,144,255,.08);
+  border-radius:8px;font-size:.83rem;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);
+}
+.ptask .pb .ans.show{display:block;}
+.ptask-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px;}
+.ptask-tag{background:rgba(30,144,255,.1);color:var(--accent);padding:3px 9px;border-radius:20px;font-size:.7rem;font-weight:700;}
+.btn-ans{
+  margin-top:8px;padding:5px 13px;background:transparent;border:1.5px solid var(--accent);
+  border-radius:7px;color:var(--accent);font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;transition:all .18s;
+}
+.btn-ans:hover{background:var(--accent);color:#fff;}
+.stem{background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:12px;padding:16px 18px;margin:10px 0;border-left:5px solid #1565c0;}
+body.dark .stem{background:linear-gradient(135deg,#0d2540,#0a1a2e);}
+.stem-lbl{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:6px;}
+.stem p{font-size:.86rem;color:var(--text2);line-height:1.65;}
+.stem strong{color:var(--text);}
+.stem .ans{margin-top:8px;font-weight:800;color:var(--ok);font-size:.88rem;}
+.geo-wrap{border-radius:12px;overflow:hidden;border:2px solid var(--border);box-shadow:var(--shadow);margin:12px 0;}
+.geo-wrap iframe{width:100%;height:420px;border:none;display:block;}
+
+/* ── VIDEO EMBED ── */
+.video-featured{
+  border-radius:14px;overflow:hidden;border:2px solid var(--border);
+  box-shadow:var(--shadow);margin:0 0 18px 0;background:#000;position:relative;
+}
+.video-featured iframe{width:100%;height:400px;border:none;display:block;}
+.video-label{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;padding:10px 16px;font-weight:800;font-size:.88rem;
+  display:flex;align-items:center;gap:8px;
+}
+
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px;}
+.vcard{
+  background:var(--card2);border-radius:12px;overflow:hidden;
+  border:1px solid var(--border);transition:all .22s;text-decoration:none;display:block;
+}
+.vcard:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--accent);}
+.vthumb{width:100%;height:105px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;position:relative;}
+.vplay{
+  position:absolute;width:38px;height:38px;background:rgba(255,255,255,.88);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+.vcard:hover .vplay{background:#fff;}
+.vinfo{padding:9px 11px;}
+.vinfo .vt{font-weight:800;font-size:.82rem;color:var(--text);}
+.vinfo .vd{font-size:.72rem;color:var(--text2);margin-top:2px;}
+.vurl-row{display:flex;gap:8px;margin-bottom:6px;align-items:center;}
+.vurl-row input{
+  flex:1;padding:7px 11px;border:1.5px solid var(--border);border-radius:8px;
+  background:var(--card2);color:var(--text);font-family:'Nunito',sans-serif;font-size:.82rem;outline:none;
+  transition:border .18s;
+}
+.vurl-row input:focus{border-color:var(--accent);}
+.vurl-row button{
+  padding:7px 14px;background:var(--accent);color:#fff;border:none;border-radius:8px;
+  cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;transition:background .18s;white-space:nowrap;
+}
+.vurl-row button:hover{background:#1565c0;}
+.gloss-search{
+  width:100%;padding:9px 14px;border:2px solid var(--border);border-radius:10px;
+  background:var(--card2);color:var(--text);font-family:'Nunito',sans-serif;font-size:.88rem;
+  outline:none;margin-bottom:14px;transition:border .18s;
+}
+.gloss-search:focus{border-color:var(--accent);}
+.glist{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.gitem{
+  background:var(--card2);border-left:4px solid var(--accent2);border-radius:10px;
+  padding:12px 14px;cursor:pointer;transition:all .18s;border:1px solid var(--border);
+}
+.gitem:hover{border-left-color:var(--accent);box-shadow:var(--shadow);}
+.gitem b{display:block;color:var(--accent);font-size:.88rem;font-weight:800;margin-bottom:3px;}
+.gitem .gdesc{font-size:.78rem;color:var(--text2);line-height:1.55;display:none;}
+.gitem.open .gdesc{display:block;}
+.gitem .garrow{float:right;font-size:.7rem;color:var(--text2);transition:transform .2s;}
+.gitem.open .garrow{transform:rotate(180deg);}
+.tq{background:var(--card2);border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid var(--border);}
+.tq-n{font-size:.7rem;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.tq-txt{font-weight:700;font-size:.92rem;color:var(--text);margin-bottom:11px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{
+  padding:9px 13px;border:2px solid var(--border);border-radius:8px;
+  background:var(--card);color:var(--text);font-family:'Nunito',sans-serif;
+  font-size:.85rem;font-weight:600;cursor:pointer;text-align:left;transition:all .16s;
+}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--bg2);}
+.opt.ok{background:#d5f5e3!important;border-color:var(--ok)!important;color:var(--ok)!important;}
+.opt.err{background:#fadbd8!important;border-color:var(--err)!important;color:var(--err)!important;}
+.tfb{margin-top:9px;padding:7px 12px;border-radius:8px;font-size:.82rem;font-weight:700;display:none;}
+.tfb.show{display:block;}
+.tfb.ok2{background:#d5f5e3;color:var(--ok);}
+.tfb.err2{background:#fadbd8;color:var(--err);}
+.score-box{
+  display:none;margin-top:16px;padding:20px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border-radius:12px;text-align:center;
+}
+.score-box.show{display:block;}
+.score-box h3{font-size:1.4rem;margin-bottom:5px;}
+.prog-wrap{background:var(--bg2);border-radius:20px;height:7px;margin-top:8px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:20px;transition:width .35s;}
+.btn{
+  padding:10px 22px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border:none;border-radius:10px;cursor:pointer;font-family:'Nunito',sans-serif;
+  font-weight:800;font-size:.88rem;transition:all .2s;box-shadow:0 4px 14px rgba(30,144,255,.3);
+  margin-top:8px;margin-right:8px;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(30,144,255,.4);}
+.btn.red{background:linear-gradient(135deg,#e74c3c,#c0392b);box-shadow:0 4px 14px rgba(192,57,43,.3);}
+.btn.red:hover{box-shadow:0 6px 20px rgba(192,57,43,.4);}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--accent3);border-radius:3px;}
+@media(max-width:768px){
+  :root{--sidebar:0px;}
+  .sidebar{position:relative;width:100%;min-height:auto;}
+  .content{margin-left:0;padding:14px;}
+  body{flex-direction:column;}
+  .video-featured iframe{height:220px;}
+}
+</style>
+</head>
+<body>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <h1>📐 Геометрия</h1>
+    <small>7-СЫНЫП · ҮШБҰРЫШТАР</small>
+  </div>
+  <div class="sb-search">
+    <input type="text" id="sbSearch" placeholder="🔍 Тақырып іздеу..." oninput="doSearch(this.value)" autocomplete="off">
+    <span class="s-icon" onclick="clearSearch()">✕</span>
+    <div class="s-panel" id="sPanel"></div>
+  </div>
+  <nav class="sb-nav">
+    <div class="acc" id="acc1">
+      <div class="acc-hd" onclick="togAcc('acc1')">
+        <span class="ico"></span><span class="lbl">Теория</span><span class="arr">▾</span>
+      </div>
+      <div class="acc-bd">
+        <a href="#t1" class="acc-lnk">▸ Үшбұрыш түрлері</a>
+        <a href="#t2" class="acc-lnk">▸ Биссектриса, медиана, биіктік</a>
+        <a href="#t3" class="acc-lnk">▸ Элементтер (теңқаб., теңбүй., тікб.)</a>
+        <a href="#t4" class="acc-lnk">▸ Биіктіктерді салыстыру</a>
+        <a href="#t5" class="acc-lnk">▸ Теңдік белгілері</a>
+        <a href="#t6" class="acc-lnk">▸ Теңбүйірлі үшбұрыш</a>
+        <a href="#t7" class="acc-lnk">▸ Бұрыштар қосындысы</a>
+        <a href="#t8" class="acc-lnk">▸ Үшбұрыш теңсіздігі</a>
+        <a href="#t9" class="acc-lnk">▸ Тікбұрышты үшбұрыш</a>
+      </div>
+    </div>
+    <div class="acc" id="acc2">
+      <div class="acc-hd" onclick="togAcc('acc2')">
+        <span class="ico"></span><span class="lbl">Практика</span><span class="arr">▾</span>
+      </div>
+      <div class="acc-bd">
+        <a href="#pgeo" class="acc-lnk">▸ GeoGebra</a>
+        <a href="#pcambridge" class="acc-lnk">▸ Cambridge есептері</a>
+        <a href="#ppogorelev" class="acc-lnk">▸ Погорелев есептері</a>
+        <a href="#pstem" class="acc-lnk">▸ STEM есептері</a>
+      </div>
+    </div>
+    <div class="acc" id="acc3">
+      <div class="acc-hd" onclick="togAcc('acc3')">
+        <span class="ico"></span><span class="lbl">Тест</span><span class="arr">▾</span>
+      </div>
+      <div class="acc-bd">
+        <a href="#test" class="acc-lnk">▸ 15 сұрақтан тұратын тест</a>
+      </div>
+    </div>
+    <a href="#glossary" class="sb-lnk"> Глоссарий</a>
+    <a href="#video" class="sb-lnk"> Видео сабақтар</a>
+  </nav>
+  <div class="sb-foot">
+    <button class="btn-mode" id="modeBtn" onclick="toggleMode()">🌙 Күн / Түн режимі</button>
+  </div>
+</aside>
+
+<!-- CONTENT -->
+<main class="content">
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Үшбұрыштар </h1>
+    <div class="tags">
+      <span class="tag"> 7-сынып</span>
+      <span class="tag"> Геометрия</span>
+      <span class="tag">🇰🇿 Қазақ тілінде</span>
+      <span class="tag"> STEM</span>
+      <span class="tag">🔍 Іздеу бар</span>
+    </div>
+  </div>
+
+  <!-- THEORY -->
+  <div class="card" id="theory">
+    <div class="ch"><div class="ch-ico"></div><h2>Теориялық материал</h2></div>
+    <!-- T1 -->
+    <div class="tb" id="t1">
+      <h3> 1. Үшбұрыштың түрлері</h3>
+      <p><strong>Үшбұрыш</strong> — бір түзуде жатпайтын үш нүктені жалғастыратын үш кесіндіден тұратын геометриялық фигура.</p>
+      <p style="margin-top:10px;"><strong> Қабырғаларына қарай:</strong></p>
+      <div class="igrid" style="margin-top:8px;">
+        <div class="itile"><div class="tico"></div><div class="tnm">Теңқабырғалы</div><div class="tds">a = b = c, барлық бұрышы 60°</div></div>
+        <div class="itile"><div class="tico"></div><div class="tnm">Теңбүйірлі</div><div class="tds">a = b ≠ c, негіздегі бұрыштар тең</div></div>
+        <div class="itile"><div class="tico"></div><div class="tnm">Әртүрлі қабырғалы</div><div class="tds">a ≠ b ≠ c</div></div>
+      </div>
+      <p style="margin-top:12px;"><strong> Бұрыштарына қарай:</strong></p>
+      <div class="igrid" style="margin-top:8px;">
+        <div class="itile"><div class="tico">∠</div><div class="tnm">Сүйір бұрышты</div><div class="tds">Барлық бұрышы &lt; 90°</div></div>
+        <div class="itile"><div class="tico">⊾</div><div class="tnm">Тікбұрышты</div><div class="tds">Бір бұрышы = 90°</div></div>
+        <div class="itile"><div class="tico">⬡</div><div class="tnm">Доғал бұрышты</div><div class="tds">Бір бұрышы &gt; 90°</div></div>
+      </div>
+      <div class="diag">
+        <svg viewBox="0 0 580 165" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="95,148 50,58 140,58" fill="#e3f2fd" stroke="#1e90ff" stroke-width="2.2"/>
+          <text x="95" y="163" text-anchor="middle" font-size="11" fill="#1565c0" font-weight="700">Теңқабырғалы</text>
+          <text x="87" y="42" font-size="9" fill="#555">60°</text>
+          <polygon points="295,148 240,58 350,58" fill="#e8f5e9" stroke="#43a047" stroke-width="2.2"/>
+          <text x="295" y="163" text-anchor="middle" font-size="11" fill="#2e7d32" font-weight="700">Теңбүйірлі</text>
+          <polygon points="460,148 460,60 555,148" fill="#fff3e0" stroke="#ef6c00" stroke-width="2.2"/>
+          <rect x="460" y="136" width="12" height="12" fill="none" stroke="#ef6c00" stroke-width="1.8"/>
+          <text x="505" y="163" text-anchor="middle" font-size="11" fill="#e65100" font-weight="700">Тікбұрышты</text>
+        </svg>
+        <figcaption>Сурет 1 — Үшбұрыштың негізгі түрлері</figcaption>
+      </div>
+    </div>
+    <!-- T2 -->
+    <div class="tb" id="t2">
+      <h3>2. Биссектриса, Медиана, Биіктік, Орта сызық</h3>
+      <div class="igrid">
+        <div class="itile"><div class="tico"></div><div class="tnm">Биссектриса</div><div class="tds">Бұрышты тең екіге бөліп, қарсы қабырғаға жеткен кесінді</div></div>
+        <div class="itile"><div class="tico"></div><div class="tnm">Медиана</div><div class="tds">Төбеден қарсы қабырғаның ортасына жүргізілген кесінді</div></div>
+        <div class="itile"><div class="tico"></div><div class="tnm">Биіктік</div><div class="tds">Төбеден қарсы қабырғаға перпендикуляр</div></div>
+        <div class="itile"><div class="tico"></div><div class="tnm">Орта сызық</div><div class="tds">Екі қабырғаның ортасын жалғайтын кесінді</div></div>
+      </div>
+      <div class="formula">Орта сызық теоремасы: MN ∥ BC, MN = ½ · BC</div>
+      <ul style="margin-top:10px;">
+        <li><strong>3 медиана</strong> → ауырлық орталығы (2:1 қатынасында бөледі)</li>
+        <li><strong>3 биіктік</strong> → ортоцентр</li>
+        <li><strong>3 биссектриса</strong> → ішкі шеңбер орталығы</li>
+        <li><strong>3 орта перпендикуляр</strong> → сырттан шеңбер орталығы</li>
+      </ul>
+    </div>
+    <!-- T3 -->
+    <div class="tb" id="t3">
+      <h3> 3. Теңқабырғалы, Теңбүйірлі, Тікбұрышты үшбұрыш элементтері</h3>
+      <p><strong>Теңқабырғалы (a = b = c):</strong></p>
+      <ul><li>∠A = ∠B = ∠C = 60°</li><li>Медиана = Биссектриса = Биіктік (бір сызық)</li><li>Биіктігі: h = a√3/2</li></ul>
+      <p style="margin-top:9px;"><strong>Теңбүйірлі (a = c, b — негіз):</strong></p>
+      <ul><li>Негіздегі бұрыштар тең: ∠A = ∠C</li><li>Негізге жүргізілген медиана = биссектриса = биіктік</li></ul>
+      <p style="margin-top:9px;"><strong>Тікбұрышты (∠C = 90°):</strong></p>
+      <ul><li><strong>Гипотенуза (c)</strong> — тік бұрышқа қарама-қарсы жатқан ең ұзын қабырға</li><li><strong>Катеттер (a, b)</strong> — тік бұрышты жасайтын қабырғалар</li><li>Тік бұрышқа жүргізілген медиана = c/2</li></ul>
+      <div class="formula">Пифагор теоремасы: a² + b² = c²</div>
+    </div>
+    <!-- T4 -->
+    <div class="tb" id="t4">
+      <h3> 4. Сүйір, Доғал, Тікбұрышты үшбұрыштардың биіктіктерін салыстыру</h3>
+      <table class="tbl">
+        <tr><th>Үшбұрыш түрі</th><th>Биіктіктердің орны</th><th>Ортоцентр</th></tr>
+        <tr><td>∠ Сүйір бұрышты</td><td>Үшеуі де ішінде</td><td>Үшбұрыш ішінде</td></tr>
+        <tr><td>⊾ Тікбұрышты</td><td>Екі катет — биіктік, үшіншісі ішінде</td><td>Тік бұрыш төбесінде</td></tr>
+        <tr><td>⬡ Доғал бұрышты</td><td>Екі биіктік сыртта</td><td>Үшбұрыш сыртында</td></tr>
+      </table>
+      <div class="diag" style="margin-top:12px;">
+        <svg viewBox="0 0 560 155" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="90,140 50,45 150,45" fill="#e3f2fd" stroke="#1e90ff" stroke-width="2"/>
+          <line x1="90" y1="140" x2="90" y2="45" stroke="#e74c3c" stroke-width="1.8" stroke-dasharray="4,2"/>
+          <text x="90" y="153" text-anchor="middle" font-size="10" fill="#1565c0" font-weight="700">Сүйір</text>
+          <polygon points="275,140 275,42 375,140" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+          <rect x="275" y="128" width="12" height="12" fill="none" stroke="#ef6c00" stroke-width="1.5"/>
+          <text x="325" y="153" text-anchor="middle" font-size="10" fill="#e65100" font-weight="700">Тікбұрышты</text>
+          <polygon points="485,140 420,80 540,80" fill="#fce4ec" stroke="#e91e63" stroke-width="2"/>
+          <line x1="390" y1="80" x2="420" y2="80" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="420" y1="140" x2="390" y2="80" stroke="#e74c3c" stroke-width="1.8" stroke-dasharray="4,2"/>
+          <text x="485" y="153" text-anchor="middle" font-size="10" fill="#880e4f" font-weight="700">Доғал</text>
+        </svg>
+        <figcaption>Сурет 2 — Биіктіктердің орналасуы</figcaption>
+      </div>
+    </div>
+    <!-- T5 -->
+    <div class="tb" id="t5">
+      <h3> 5. Үшбұрыштар теңдігінің белгілері</h3>
+      <div class="igrid">
+        <div class="itile"><div class="tico">I</div><div class="tnm">ҚЖҚ белгісі</div><div class="tds">Екі қабырға және олардың аралық бұрышы тең</div></div>
+        <div class="itile"><div class="tico">II</div><div class="tnm">ҚБҚ белгісі</div><div class="tds">Бір қабырға және екі жағындағы бұрыштар тең</div></div>
+        <div class="itile"><div class="tico">III</div><div class="tnm">ҚҚҚ белгісі</div><div class="tds">Үш қабырғасы сәйкес тең</div></div>
+      </div>
+      <div class="formula">△ABC ≅ △A₁B₁C₁  ⟺  белгілердің бірі орындалса</div>
+      <p style="margin-top:10px;"><strong>Тікбұрышты үшбұрыш үшін қосымша белгілер:</strong></p>
+      <ul>
+        <li><strong>ГК</strong> — гипотенуза мен катет тең</li>
+        <li><strong>ГБ</strong> — гипотенуза мен жедел бұрыш тең</li>
+        <li><strong>КК</strong> — екі катет тең</li>
+        <li><strong>КБ</strong> — катет пен іргелес жедел бұрыш тең</li>
+      </ul>
+    </div>
+    <!-- T6 -->
+    <div class="tb" id="t6">
+      <h3>🔻 6. Теңбүйірлі үшбұрыш: қасиеттері және белгілері</h3>
+      <p><strong>Анықтама:</strong> Екі қабырғасы (бүйірлері) тең үшбұрыш.</p>
+      <p style="margin-top:9px;"><strong> Қасиеттері:</strong></p>
+      <ul>
+        <li>Негіздегі бұрыштары тең: ∠B = ∠C</li>
+        <li>Негізге жүргізілген биссектриса = медиана = биіктік — бір сызық</li>
+        <li>Осы сызық — үшбұрыштың симметрия осі</li>
+      </ul>
+      <p style="margin-top:9px;"><strong> Белгілері (үшбұрыш теңбүйірлі болады, егер):</strong></p>
+      <ul>
+        <li>Екі бұрышы тең болса: ∠B = ∠C ⟹ AB = AC</li>
+        <li>Медиана биіктікпен немесе биссектрисамен сәйкес келсе</li>
+      </ul>
+      <div class="formula">AB = AC ⟺ ∠ABC = ∠ACB</div>
+    </div>
+    <!-- T7 -->
+    <div class="tb" id="t7">
+      <h3> 7. Бұрыштар қосындысы. Сыртқы бұрыш</h3>
+      <div class="formula">∠A + ∠B + ∠C = 180°</div>
+      <p style="margin-top:10px;"><strong>Сыртқы бұрыш теоремасы:</strong> Үшбұрыштың сыртқы бұрышы іргелес емес екі ішкі бұрыштың қосындысына тең.</p>
+      <div class="formula">∠BCD = ∠A + ∠B</div>
+      <p style="margin-top:10px;"><strong>Салдар:</strong> Сыртқы бұрыш кез келген ішкі іргелес емес бұрыштан үлкен.</p>
+      <div class="diag">
+        <svg viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="190,16 40,124 330,124" fill="#e3f2fd" stroke="#1e90ff" stroke-width="2.2"/>
+          <line x1="330" y1="124" x2="395" y2="124" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3"/>
+          <text x="185" y="12" font-size="12" fill="#1565c0" font-weight="800">α</text>
+          <text x="48" y="138" font-size="12" fill="#1565c0" font-weight="800">β</text>
+          <text x="316" y="115" font-size="12" fill="#1565c0" font-weight="800">γ</text>
+          <text x="356" y="115" font-size="11" fill="#e74c3c" font-weight="800">γ'=α+β</text>
+        </svg>
+        <figcaption>Сурет 3 — Сыртқы бұрыш теоремасы</figcaption>
+      </div>
+    </div>
+    <!-- T8 -->
+    <div class="tb" id="t8">
+      <h3> 8. Үшбұрыш теңсіздігі</h3>
+      <div class="formula">a + b &gt; c &nbsp;&nbsp; a + c &gt; b &nbsp;&nbsp; b + c &gt; a</div>
+      <p style="margin-top:10px;"><strong>Мағынасы:</strong> Кез келген қабырға қалған екі қабырғаның қосындысынан кіші.</p>
+      <table class="tbl" style="margin-top:10px;">
+        <tr><th>Үш кесінді</th><th>Тексеру</th><th>Нәтиже</th></tr>
+        <tr><td>3, 4, 5</td><td>3+4=7 &gt; 5 ✓</td><td style="color:var(--ok);font-weight:700;">Үшбұрыш болады</td></tr>
+        <tr><td>2, 3, 6</td><td>2+3=5 &lt; 6 ✗</td><td style="color:var(--err);font-weight:700;">Болмайды</td></tr>
+        <tr><td>5, 7, 9</td><td>5+7=12 &gt; 9 ✓</td><td style="color:var(--ok);font-weight:700;">Үшбұрыш болады</td></tr>
+        <tr><td>1, 1, 3</td><td>1+1=2 &lt; 3 ✗</td><td style="color:var(--err);font-weight:700;">Болмайды</td></tr>
+      </table>
+      <p style="margin-top:10px;"><strong>Салдар:</strong> Үлкен бұрышқа үлкен қабырға қарама-қарсы жатады.</p>
+    </div>
+    <!-- T9 -->
+    <div class="tb" id="t9">
+      <h3>📐 9. Тікбұрышты үшбұрыштың қасиеттері және теңдік белгілері</h3>
+      <ul>
+        <li>Жедел бұрыштарының қосындысы: α + β = 90°</li>
+        <li>Тік бұрышқа жүргізілген медиана = гипотенузаның жартысы: m_c = c/2</li>
+        <li>30°-60°-90° үшбұрышта: кіші катет = c/2, үлкен катет = c√3/2</li>
+        <li>45°-45°-90° үшбұрышта: катеттер тең, c = a√2</li>
+      </ul>
+      <div class="formula">a² + b² = c² &nbsp;|&nbsp; sin α = a/c &nbsp;|&nbsp; cos α = b/c &nbsp;|&nbsp; tan α = a/b</div>
+      <div class="diag">
+        <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="70,135 70,25 175,135" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+          <rect x="70" y="123" width="12" height="12" fill="none" stroke="#ef6c00" stroke-width="1.8"/>
+          <text x="55" y="82" font-size="9" fill="#e65100" font-weight="700">a</text>
+          <text x="115" y="148" font-size="9" fill="#e65100" font-weight="700">b</text>
+          <text x="118" y="88" font-size="9" fill="#922b21" font-weight="700">c</text>
+          <text x="90" y="148" text-anchor="middle" font-size="9" fill="#888">a²+b²=c²</text>
+          <polygon points="290,135 290,35 365,135" fill="#e8f5e9" stroke="#43a047" stroke-width="2"/>
+          <rect x="290" y="123" width="12" height="12" fill="none" stroke="#43a047" stroke-width="1.8"/>
+          <text x="305" y="33" font-size="8" fill="#2e7d32">90°</text>
+          <text x="290" y="148" text-anchor="middle" font-size="9" fill="#2e7d32" font-weight="700">30°-60°-90°</text>
+          <polygon points="450,135 450,35 530,135" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+          <rect x="450" y="123" width="12" height="12" fill="none" stroke="#7b1fa2" stroke-width="1.8"/>
+          <text x="465" y="33" font-size="8" fill="#6a1b9a">90°</text>
+          <text x="470" y="148" text-anchor="middle" font-size="9" fill="#6a1b9a" font-weight="700">45°-45°-90°</text>
+        </svg>
+        <figcaption>Сурет 4 — Тікбұрышты үшбұрыш түрлері</figcaption>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div class="card" id="practice">
+    <div class="ch"><div class="ch-ico"></div><h2>Практикалық бөлім</h2></div>
+    <!-- GeoGebra -->
+    <div class="tb" id="pgeo">
+      <h3>GeoGebra — интерактивті салу</h3>
+      <p style="margin-bottom:10px;">GeoGebra-да тікелей салу, өлшеу және тексеру жасаңыз:</p>
+      <div class="geo-wrap">
+        <iframe src="https://www.geogebra.org/geometry?embed" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="font-size:.8rem;color:var(--text2);margin-top:8px;"> <strong>Кеңес:</strong> «Үшбұрыш», «Бұрышты өлшеу», «Қашықтықты өлшеу» және «Медиана» құралдарын пайдаланыңыз.</p>
+    </div>
+
+    <div class="tb" id="pcambridge">
+      <h3> Тапсырма 1</h3>
+      <p style="margin-bottom:12px;color:var(--text2);font-size:.85rem;">«Шешімін көру» батырмасын басып жауапты тексеріңіз.</p>
+      <div class="ptask">
+        <div class="pn">1а</div>
+        <div class="pb">
+          <p><strong>x табыңыз:</strong> Теңбүйірлі үшбұрышта екі бұрыш 72° тең. x = ?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span><span class="ptask-tag">Бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">x + 72 + 72 = 180° → 2(72) = 144 → x = 180 − 144 = <strong>36°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">1б</div>
+        <div class="pb">
+          <p><strong>x табыңыз:</strong> Үшбұрышта P = 70°, екі бұрыш x тең. x = ?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">70 + x + x = 180 → 2x = 110 → x = <strong>55°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">1в</div>
+        <div class="pb">
+          <p><strong>x табыңыз:</strong> Үшбұрышта x° және 2x° бұрыштары бар, сыртқы бұрыш белгіленген.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Сыртқы бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">Сыртқы бұрыш = x + 2x = 3x. x + 2x + үш. бұр = 180. x = <strong>30°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">1д</div>
+        <div class="pb">
+          <p><strong>x табыңыз:</strong> Үшбұрышта ∠A = 120° — сыртқы бұрыш, теңбүйірлі. x = ?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Сыртқы бұрыш</span><span class="ptask-tag">Теңбүйірлі</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">Сыртқы бұрыш = x + x → 120 = 2x → x = <strong>60°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">1е</div>
+        <div class="pb">
+          <p><strong>x табыңыз:</strong> Теңбүйірлі үшбұрышта ∠D = 65°, тең белгілер берілген. x = ?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">x + x + 65 = 180 → 2x = 115 → x = <strong>57.5°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">2а</div>
+        <div class="pb">
+          <p><strong>x табыңыз:</strong> Теңбүйірлі үшбұрышта ∠B = ∠C = 75°, бүйір = 16 см. x = ?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span><span class="ptask-tag">Қабырға</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">Тең бұрыштарға қарсы жатқан қабырғалар тең → x = <strong>16 см</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">3а</div>
+        <div class="pb">
+          <p><strong>Жіктеңіз:</strong> ∠A = 60°, белгіленген үшбұрыш. Қандай үшбұрыш?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Жіктеу</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">Үш бұрышы да 60° → <strong>Теңқабырғалы (Equilateral)</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">3г</div>
+        <div class="pb">
+          <p><strong>Жіктеңіз:</strong> △JKL-да ∠J = 75°, ∠K = 30°. Қандай үшбұрыш?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Жіктеу</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">∠L = 180 − 75 − 30 = 75°. ∠J = ∠L = 75° → <strong>Теңбүйірлі (Isosceles)</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">4</div>
+        <div class="pb">
+          <p><strong>x табыңыз:</strong> △ABC-да ∠A = x°, ∠B = (x+24)°, ∠C = 52°. x = ? Үшбұрыш қандай?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span><span class="ptask-tag">Есептеу</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">x + (x+24) + 52 = 180 → 2x + 76 = 180 → 2x = 104 → x = <strong>52°</strong>. ∠A = ∠C = 52° → <strong>Теңбүйірлі, AB = BC</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Ex4C #4а</div>
+        <div class="pb">
+          <p><strong>a табыңыз:</strong> Үшбұрышта бұрыштар a°, 4a°, 4a°.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">a + 4a + 4a = 180 → 9a = 180 → a = <strong>20°</strong>. Бұрыштар: 20°, 80°, 80°</div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Ex4C #4б</div>
+        <div class="pb">
+          <p><strong>b табыңыз:</strong> Бұрыштар: b°, (b+5)°, (b−5)°.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">b + (b+5) + (b−5) = 180 → 3b = 180 → b = <strong>60°</strong>. Бұрыштар: 60°, 65°, 55°</div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Ex4C #4в</div>
+        <div class="pb">
+          <p><strong>c және d табыңыз:</strong> Үшбұрышта 48°, 76°, c°, сыртқы бұрыш d°.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Сыртқы бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">c = 180 − 48 − 76 = <strong>56°</strong>. d = 48 + 76 = <strong>124°</strong> (сыртқы бұрыш теоремасы)</div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Ex4C #5</div>
+        <div class="pb">
+          <p><strong>Бұрыштарды табыңыз:</strong> Үшбұрыш бұрыштары x°, (x−12)° және (2x+6)°.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңдеу</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">x + (x−12) + (2x+6) = 180 → 4x − 6 = 180 → 4x = 186 → x = 46.5°. Бұрыштар: <strong>46.5°, 34.5°, 99°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Пифагор 1</div>
+        <div class="pb">
+          <p><strong>Гипотенузаны табыңыз:</strong> Катеттері 3 см және 2 см.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Пифагор</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">x² = 3² + 2² = 9 + 4 = 13 → x = √13 ≈ <strong>3.61 см</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Пифагор 2</div>
+        <div class="pb">
+          <p><strong>Катетті табыңыз:</strong> Гипотенуза 6 см, бір катет 5 см. Екінші катет = ?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Пифагор</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">x² + 5² = 6² → x² = 36 − 25 = 11 → x = √11 ≈ <strong>3.32 см</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Лувр</div>
+        <div class="pb">
+          <p><strong>STEM:</strong> Лувр пирамидасы: табан қабырғасы 35 м, биіктігі 20.6 м. Жанама қырын тап.</p>
+          <div class="ptask-tags"><span class="ptask-tag">STEM</span><span class="ptask-tag">Пифагор</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">Жарты табан = 17.5 м. l² = 17.5² + 20.6² = 306.25 + 424.36 = 730.61 → l ≈ <strong>27.03 м</strong></div>
+        </div>
+      </div>
+    </div>
+
+        <div class="tb" id="ppogorelev">
+      <h3>Тапсырмалар 2 </h3>
+      <p style="margin-bottom:12px;color:var(--text2);font-size:.85rem;">Дәлелдеу есептері — ең маңызды тақырып.</p>
+      <div class="ptask">
+        <div class="pn">§3 #1</div>
+        <div class="pb">
+          <p><strong>Бет 44:</strong> AB және CD кесінділері O нүктесінде қиылысады, O нүктесі екеуінің де ортасы. AC = 10 м болса, BD = ?</p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңдік</span><span class="ptask-tag">SAS</span></div>
+          <button class="btn-ans" onclick="togAns(this)">📋 Шешімін көру</button>
+          <div class="ans">△AOC және △BOD: AO=OB, CO=OD, ∠AOC=∠BOD (төбелес бұрыштар) → SAS → △AOC≅△BOD → BD = AC = <strong>10 м</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">§3 #2</div>
+        <div class="pb">
+          <p><strong>Бет 44:</strong> AB кесіндісінің O ортасы арқылы AB-ға перпендикуляр түзу жүргізілген. XA = XB екенін дәлелде.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Дәлелдеу</span><span class="ptask-tag">SAS</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">△XOA және △XOB: OA=OB (O ортасы), XO ортақ, ∠XOA=∠XOB=90° → SAS → XA = XB ✓</div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">§3 #4</div>
+        <div class="pb">
+          <p><strong>Бет 44:</strong> CD=AC, CE=BC арқылы ED = AB екенін дәлелде.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Дәлелдеу</span><span class="ptask-tag">SAS</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">△ACB және △DCE: AC=DC, BC=EC (шарт), ∠ACB=∠DCE (төбелес) → SAS → ED = AB ✓</div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Бет 45 #9</div>
+        <div class="pb">
+          <p><strong>Теңбүйірлі үшбұрыштың периметрі 1 м, табаны 0.4 м. Бүйір қабырғасын тап.</strong></p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span><span class="ptask-tag">Периметр</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">2a + 0.4 = 1 → 2a = 0.6 → a = <strong>0.3 м</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Бет 45 #10</div>
+        <div class="pb">
+          <p><strong>Теңбүйірлі үшбұрыштың периметрі 7.5 м, бүйір қабырғасы 2 м. Табанын тап.</strong></p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span><span class="ptask-tag">Периметр</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">2(2) + c = 7.5 → 4 + c = 7.5 → c = <strong>3.5 м</strong>. Тексеру: 2+2=4 &gt; 3.5 ✓</div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Бет 45 #11</div>
+        <div class="pb">
+          <p><strong>Периметр 15.6 м, теңбүйірлі үшбұрыш.</strong> 1) Табан бүйірден 3 м-ге аз. 2) Табан бүйірден 3 м-ге артық.</p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span><span class="ptask-tag">Теңдеу</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">1) c = a−3: 2a+(a−3)=15.6 → 3a=18.6 → a=<strong>6.2 м</strong>, c=<strong>3.2 м</strong>. 2) c=a+3: 2a+(a+3)=15.6 → 3a=12.6 → a=<strong>4.2 м</strong>, c=<strong>7.2 м</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Бет 64 #29</div>
+        <div class="pb">
+          <p><strong>△ABC-да A мен B-дан биссектрисалар D нүктесінде қиылысты.</strong> ∠ADB=? 1) ∠A=50°, ∠B=100°; 2) ∠C=130°</p>
+          <div class="ptask-tags"><span class="ptask-tag">Биссектриса</span><span class="ptask-tag">Бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">Формула: ∠ADB = 90° + ∠C/2. 1) ∠C=30° → ∠ADB=<strong>105°</strong>. 2) ∠ADB=90+65=<strong>155°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Бет 64 #32</div>
+        <div class="pb">
+          <p><strong>Теңбүйірлі үшбұрыштың бір сыртқы бұрышы 70°. Бұрыштарын тап.</strong></p>
+          <div class="ptask-tags"><span class="ptask-tag">Теңбүйірлі</span><span class="ptask-tag">Сыртқы бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">Ішкі бұрыш = 110° (төбе). Табан бұрышы = (180−110)/2 = 35°. Жауап: <strong>110°, 35°, 35°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Бет 64 #33</div>
+        <div class="pb">
+          <p><strong>Екі сыртқы бұрыш 120° және 150°. Үшбұрыш бұрыштарын тап.</strong></p>
+          <div class="ptask-tags"><span class="ptask-tag">Сыртқы бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">∠A=60°, ∠B=30°, ∠C=<strong>90°</strong>. Бұрыштар: <strong>60°, 30°, 90°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Бет 64 #38</div>
+        <div class="pb">
+          <p><strong>A және B-дағы сыртқы бұрыштар қосындысы 240°. ∠C = ?</strong></p>
+          <div class="ptask-tags"><span class="ptask-tag">Сыртқы бұрыш</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">(180−∠A)+(180−∠B)=240 → ∠A+∠B=120 → ∠C=<strong>60°</strong></div>
+        </div>
+      </div>
+      <div class="ptask">
+        <div class="pn">Бет 64 #41</div>
+        <div class="pb">
+          <p><strong>Тікбұрышты △ABC-да BD биіктігі жүргізілген. ∠CBD=? 1) ∠A=20°; 2) ∠A=65°; 3) ∠A=α</strong></p>
+          <div class="ptask-tags"><span class="ptask-tag">Тікбұрышты</span><span class="ptask-tag">Биіктік</span></div>
+          <button class="btn-ans" onclick="togAns(this)"> Шешімін көру</button>
+          <div class="ans">∠CBD=∠A. 1) <strong>20°</strong>. 2) <strong>65°</strong>. 3) <strong>α</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEM -->
+    <div class="tb" id="pstem">
+      <h3>STEM Есептері</h3>
+      <div class="stem">
+        <div class="stem-lbl"> Архитектура STEM</div>
+        <p><strong>Есеп 1:</strong> Үйдің шатыры 6 м ені, биіктігі 2.4 м. Шатыр жапқышының ұзындығы?</p>
+        <div class="ans" style="display:block;margin-top:8px;padding:8px 12px;background:rgba(30,144,255,.08);border-radius:8px;font-size:.83rem;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);">Жарты ені = 3 м. l = √(3² + 2.4²) = √14.76 ≈ <strong>3.84 м</strong></div>
+      </div>
+      <div class="stem">
+        <div class="stem-lbl"> Табиғат STEM</div>
+        <p><strong>Есеп 2:</strong> Ағаш 60° бұрышпен 8 м сынды. Сынуға дейінгі биіктік?</p>
+        <div class="ans" style="display:block;margin-top:8px;padding:8px 12px;background:rgba(30,144,255,.08);border-radius:8px;font-size:.83rem;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);">Тік бөлік = 8·sin60° ≈ 6.93 м. Жалпы ≈ <strong>14.93 м</strong></div>
+      </div>
+      <div class="stem">
+        <div class="stem-lbl"> Физика STEM</div>
+        <p><strong>Есеп 3:</strong> Зымыран 30° бұрышпен 500 м горизонталь жүрді. Нақты ұшу қашықтығы?</p>
+        <div class="ans" style="display:block;margin-top:8px;padding:8px 12px;background:rgba(30,144,255,.08);border-radius:8px;font-size:.83rem;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);">l = 500/cos30° ≈ <strong>577 м</strong></div>
+      </div>
+      <div class="stem">
+        <div class="stem-lbl"> География STEM</div>
+        <p><strong>Есеп 4:</strong> Үш қала: 50 км, 70 км, 90 км. Үшбұрыш теңсіздігін тексер.</p>
+        <div class="ans" style="display:block;margin-top:8px;padding:8px 12px;background:rgba(30,144,255,.08);border-radius:8px;font-size:.83rem;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);">50+70=120&gt;90 ✓, 50+90=140&gt;70 ✓, 70+90=160&gt;50 ✓ → <strong>Үшбұрыш болады!</strong></div>
+      </div>
+      <div class="stem">
+        <div class="stem-lbl"> IT STEM</div>
+        <p><strong>Есеп 5:</strong> A(0,0), B(6,0), C(3,4). Периметр мен ауданды есепте.</p>
+        <div class="ans" style="display:block;margin-top:8px;padding:8px 12px;background:rgba(30,144,255,.08);border-radius:8px;font-size:.83rem;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);">AB=6, BC=5, AC=5. P=<strong>16 бірлік</strong>. S=<strong>12 бірлік²</strong></div>
+      </div>
+      <div class="stem">
+        <div class="stem-lbl">Инженерия STEM</div>
+        <p><strong>Есеп 6:</strong> Катеттері 12 м және 16 м. Жабын ұзындығы?</p>
+        <div class="ans" style="display:block;margin-top:8px;padding:8px 12px;background:rgba(30,144,255,.08);border-radius:8px;font-size:.83rem;color:var(--accent);font-weight:700;border-left:3px solid var(--accent);">c = √(144+256) = √400 = <strong>20 м</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEST -->
+  <div class="card" id="test">
+    <div class="ch"><div class="ch-ico"></div><h2>Тест тапсырмалары (15 сұрақ)</h2></div>
+    <p style="color:var(--text2);font-size:.86rem;margin-bottom:16px;">Жауапты таңдаңыз, барлық сұраққа жауап бергеннен кейін «Тестті аяқтау» батырмасын басыңыз.</p>
+    <div id="testContainer"></div>
+    <div style="margin-top:12px;">
+      <button class="btn" onclick="submitTest()">✅ Тестті аяқтау</button>
+      <button class="btn red" onclick="resetTest()">🔄 Қайта бастау</button>
+    </div>
+    <div class="prog-wrap" style="margin-top:12px;">
+      <div class="prog-fill" id="tProg" style="width:0%"></div>
+    </div>
+    <div style="font-size:.76rem;color:var(--text2);margin-top:4px;" id="tProgLbl">0 / 15 жауапталды</div>
+    <div class="score-box" id="scoreBox"></div>
+  </div>
+
+  <!-- GLOSSARY -->
+  <div class="card" id="glossary">
+    <div class="ch"><div class="ch-ico"></div><h2>Глоссарий</h2></div>
+    <input class="gloss-search" id="gSearch" type="text" placeholder="🔍 Термин іздеу..." oninput="filterGloss(this.value)">
+    <div class="glist" id="gList"></div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="card" id="video">
+    <div class="ch"><div class="ch-ico"></div><h2>Видео сабақтар</h2></div>
+
+    <!-- FEATURED VIDEO — тікелей ашылады -->
+    <div class="video-label">
+       Үшбұрыштар — негізгі сабақ (YouTube)
+    </div>
+    <div class="video-featured">
+      <iframe
+        src="https://www.youtube.com/embed/-6Qez-QeyV8"
+        title="Үшбұрыштар — 7-сынып геометрия"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <!-- Қосымша видео енгізу -->
+    <p style="color:var(--text2);font-size:.86rem;margin:14px 0 8px;">➕ Қосымша видео қосу (YouTube embed URL):</p>
+    <div id="videoSlots"></div>
+    <button class="btn" onclick="addVideoSlot()" style="margin-top:4px;">➕ Видео қосу</button>
+
+    <!-- YouTube іздеу ұсыныстары -->
+    <div style="margin-top:18px;padding:14px;background:var(--card2);border-radius:10px;border:1px solid var(--border);">
+      <div style="font-weight:800;font-size:.88rem;color:var(--accent);margin-bottom:8px;"> YouTube іздеу ұсыныстары</div>
+      <div class="vgrid">
+        <a class="vcard" href="https://www.youtube.com/results?search_query=үшбұрыш+түрлері+7+сынып+геометрия" target="_blank">
+          <div class="vthumb" style="background:linear-gradient(135deg,#1565c0,#42a5f5);"><div class="vplay">▶</div></div>
+          <div class="vinfo"><div class="vt">Үшбұрыш түрлері</div><div class="vd">YouTube → іздеу</div></div>
+        </a>
+        <a class="vcard" href="https://www.youtube.com/results?search_query=медиана+биссектриса+биіктік+үшбұрыш+қазақша" target="_blank">
+          <div class="vthumb" style="background:linear-gradient(135deg,#00897b,#26c6da);"><div class="vplay">▶</div></div>
+          <div class="vinfo"><div class="vt">Медиана, Биіктік, Биссектриса</div><div class="vd">YouTube → іздеу</div></div>
+        </a>
+        <a class="vcard" href="https://www.youtube.com/results?search_query=пифагор+теоремасы+7+сынып+қазақша" target="_blank">
+          <div class="vthumb" style="background:linear-gradient(135deg,#e53935,#ff7043);"><div class="vplay">▶</div></div>
+          <div class="vinfo"><div class="vt">Пифагор теоремасы</div><div class="vd">YouTube → іздеу</div></div>
+        </a>
+        <a class="vcard" href="https://www.youtube.com/results?search_query=үшбұрыш+теңдігі+белгілері+геометрия+қазақша" target="_blank">
+          <div class="vthumb" style="background:linear-gradient(135deg,#6a1b9a,#ab47bc);"><div class="vplay">▶</div></div>
+          <div class="vinfo"><div class="vt">Теңдік белгілері</div><div class="vd">YouTube → іздеу</div></div>
+        </a>
+        <a class="vcard" href="https://www.youtube.com/results?search_query=теңбүйірлі+үшбұрыш+қасиеттері+7+сынып" target="_blank">
+          <div class="vthumb" style="background:linear-gradient(135deg,#2e7d32,#66bb6a);"><div class="vplay">▶</div></div>
+          <div class="vinfo"><div class="vt">Теңбүйірлі үшбұрыш</div><div class="vd">YouTube → іздеу</div></div>
+        </a>
+        <a class="vcard" href="https://www.youtube.com/results?search_query=үшбұрыш+бұрыштары+қосындысы+180+қазақша" target="_blank">
+          <div class="vthumb" style="background:linear-gradient(135deg,#f57f17,#ffca28);">180°<div class="vplay">▶</div></div>
+          <div class="vinfo"><div class="vt">Бұрыштар қосындысы 180°</div><div class="vd">YouTube → іздеу</div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ACCORDION
+function togAcc(id) {
+  const el = document.getElementById(id);
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.acc').forEach(a => a.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+// DARK MODE
+function toggleMode() {
+  document.body.classList.toggle('dark');
+  const btn = document.getElementById('modeBtn');
+  btn.textContent = document.body.classList.contains('dark') ? '☀️ Күн / Түн режимі' : '🌙 Күн / Түн режимі';
+  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+}
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
+  document.getElementById('modeBtn').textContent = '☀️ Күн / Түн режимі';
+}
+
+// SHOW/HIDE ANSWER
+function togAns(btn) {
+  const ans = btn.nextElementSibling;
+  if (ans.classList.contains('show')) {
+    ans.classList.remove('show');
+    btn.textContent = ' Шешімін көру';
+  } else {
+    ans.classList.add('show');
+    btn.textContent = ' Жасыру';
+  }
+}
+
+// SEARCH
+const sDB = [
+  {title:'Үшбұрыш түрлері',text:'Теңқабырғалы теңбүйірлі тікбұрышты сүйір доғал қабырға бұрыш',id:'t1'},
+  {title:'Биссектриса медиана биіктік орта сызық',text:'Ауырлық орталығы ортоцентр медиана биссектриса биіктік',id:'t2'},
+  {title:'Теңқабырғалы теңбүйірлі тікбұрышты элементтер',text:'гипотенуза катет пифагор биіктік медиана',id:'t3'},
+  {title:'Биіктіктер орналасуы салыстыру',text:'Сүйір ішінде доғал сыртта тікбұрышты ортоцентр',id:'t4'},
+  {title:'Теңдік белгілері',text:'ҚЖҚ ҚБҚ ҚҚҚ SAS AAS SSS үш белгі тікбұрышты ГК ГБ КК КБ',id:'t5'},
+  {title:'Теңбүйірлі үшбұрыш қасиеттері белгілері',text:'Негіздегі бұрыштар тең симметрия осі',id:'t6'},
+  {title:'Бұрыштар қосындысы 180 сыртқы бұрыш',text:'∠A+∠B+∠C=180 сыртқы бұрыш теоремасы',id:'t7'},
+  {title:'Үшбұрыш теңсіздігі',text:'a+b>c үлкен бұрыш үлкен қабырға',id:'t8'},
+  {title:'Тікбұрышты үшбұрыш Пифагор',text:'a²+b²=c² катет гипотенуза 30-60-90 45-45-90',id:'t9'},
+  {title:'GeoGebra практика салу',text:'Интерактивті геометрия салу',id:'pgeo'},
+  {title:'Cambridge IGCSE есептер',text:'Exercise 4C бұрыш жіктеу теңбүйірлі пифагор',id:'pcambridge'},
+  {title:'Погорелев есептері дәлелдеу',text:'Бет 44 45 64 80 теңдік теңбүйірлі',id:'ppogorelev'},
+  {title:'STEM есептер',text:'Архитектура табиғат физика география IT',id:'pstem'},
+  {title:'Тест сұрақтар',text:'15 сұрақ тексеру жауап',id:'test'},
+  {title:'Глоссарий терминдер',text:'Анықтама термин қазақша',id:'glossary'},
+  {title:'Видео сабақ',text:'YouTube сілтемелер үшбұрыш геометрия',id:'video'},
+];
+function doSearch(q) {
+  const panel = document.getElementById('sPanel');
+  if (!q || q.length < 2) { panel.style.display='none'; return; }
+  const ql = q.toLowerCase();
+  const hits = sDB.filter(d => d.title.toLowerCase().includes(ql) || d.text.toLowerCase().includes(ql));
+  if (!hits.length) { panel.innerHTML='<div class="s-item"><span>Табылмады</span></div>'; panel.style.display='block'; return; }
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const hi = s => s.replace(new RegExp(esc(q),'gi'), m=>`<mark>${m}</mark>`);
+  panel.innerHTML = hits.map(r =>
+    `<div class="s-item" onclick="goTo('${r.id}')">
+       <b>${hi(r.title)}</b>
+       <span>${hi(r.text.slice(0,70))}…</span>
+     </div>`
+  ).join('');
+  panel.style.display='block';
+}
+function goTo(id) {
+  clearSearch();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function clearSearch() {
+  document.getElementById('sPanel').style.display='none';
+  document.getElementById('sbSearch').value='';
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('.sb-search')) clearSearch();
+});
+
+// TEST
+const questions = [
+  {q:'Үшбұрыштың ішкі бұрыштарының қосындысы нешеге тең?', opts:['90°','180°','270°','360°'], ans:1, exp:'∠A+∠B+∠C=180° — үшбұрыш теоремасы'},
+  {q:'Теңқабырғалы үшбұрыштың әр бұрышы нешеге тең?', opts:['45°','60°','90°','30°'], ans:1, exp:'180°÷3=60°'},
+  {q:'∠A=50°, ∠B=80° болса, ∠C=?', opts:['50°','40°','60°','70°'], ans:0, exp:'∠C=180−50−80=50°'},
+  {q:'Тікбұрышты үшбұрышта катеттер 6 және 8. Гипотенуза=?', opts:['12','10','14','9'], ans:1, exp:'√(36+64)=√100=10'},
+  {q:'Теңбүйірлі үшбұрышта негіздегі бұрыштар қандай?', opts:['Тең','Тең емес','Тік','Доғал'], ans:0, exp:'Теңбүйірлі үшбұрыш қасиеті'},
+  {q:'Сыртқы бұрыш теоремасы: сыртқы бұрыш =?', opts:['Іргелес ішкі бұрыш','Ең кіші ішкі бұрыш','Іргелес емес екі ішкі бұрыш қосындысы','180°'], ans:2, exp:'Сыртқы бұрыш = екі ішкі іргелес емес бұрыш қосындысы'},
+  {q:'2 см, 3 см, 6 см — үшбұрыш бола ма?', opts:['Ия','Жоқ','Тек тікбұрышты','Тек теңбүйірлі'], ans:1, exp:'2+3=5 < 6 — теңсіздік бұзылады'},
+  {q:'Орта сызық үшінші қабырғаға қандай қатынаста?', opts:['Тең','Жартысы','Екі есе','Үш есе кіші'], ans:1, exp:'Орта сызық теоремасы: MN=½BC'},
+  {q:'Тікбұрышты үшбұрышта тік бұрышқа жүргізілген медиана нешеге тең?', opts:['Катетке','Гипотенуза жартысына','Гипотенузаға','Катет жартысына'], ans:1, exp:'Тік бұрышқа жүргізілген медиана=c/2'},
+  {q:'ҚЖҚ теңдік белгісі нені білдіреді?', opts:['Үш қабырға тең','Екі қабырға және аралық бұрыш тең','Қабырға, бұрыш, бұрыш тең','Тек бұрыштар тең'], ans:1, exp:'ҚЖҚ = Қабырға, Жанасушы бұрыш, Қабырға'},
+  {q:'Доғал бұрышты үшбұрыштың биіктіктері қайда орналасады?', opts:['Барлығы ішінде','Барлығы сыртта','Екеуі сыртта бірі ішінде','Тік бұрышта'], ans:2, exp:'Доғал бұрышты үшбұрышта 2 биіктік сыртта орналасады'},
+  {q:'Теңбүйірлі үшбұрышта медиана, биссектриса және биіктік...', opts:['Әртүрлі сызықтар','Бір сызық (сәйкес келеді)','Параллель','Перпендикуляр'], ans:1, exp:'Теңбүйірлі үшбұрышта негізге жүргізілген бұл үш сызық сәйкес келеді'},
+  {q:'30°-60°-90° үшбұрышта кіші катет гипотенузаның нешесіне тең?', opts:['Жартысы','Тең','¼','Екі есе'], ans:0, exp:'30° бұрышқа қарсы жатқан катет = c/2'},
+  {q:'Үшбұрыш теңсіздігінің мағынасы:', opts:['Бұрыштар 180°','Кез келген қабырға екі қалғанның қосындысынан кіші','Тең қабырғалар бар','Гипотенуза катеттен үлкен'], ans:1, exp:'a+b>c, a+c>b, b+c>a'},
+  {q:'a°, 4a°, 4a° бұрышты үшбұрышта a=?', opts:['15°','20°','25°','30°'], ans:1, exp:'a+4a+4a=180 → 9a=180 → a=20°'},
+];
+const userAns = {};
+let answeredCount = 0;
+function buildTest() {
+  const c = document.getElementById('testContainer');
+  c.innerHTML = '';
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'tq';
+    div.id = 'tq' + i;
+    div.innerHTML = `
+      <div class="tq-n">Сұрақ ${i+1} / ${questions.length}</div>
+      <div class="tq-txt">${q.q}</div>
+      <div class="opts">
+        ${q.opts.map((o,j)=>`<button class="opt" onclick="ansQ(${i},${j})">${String.fromCharCode(65+j)}) ${o}</button>`).join('')}
+      </div>
+      <div class="tfb" id="fb${i}"></div>`;
+    c.appendChild(div);
+  });
+}
+function ansQ(qi, oi) {
+  if (userAns[qi] !== undefined) return;
+  userAns[qi] = oi;
+  answeredCount++;
+  const el = document.getElementById('tq' + qi);
+  el.querySelectorAll('.opt').forEach((b,j) => {
+    b.disabled = true;
+    if (j === questions[qi].ans) b.classList.add('ok');
+    else if (j === oi) b.classList.add('err');
+  });
+  const fb = document.getElementById('fb' + qi);
+  if (oi === questions[qi].ans) {
+    fb.textContent = '✅ Дұрыс! ' + questions[qi].exp;
+    fb.className = 'tfb show ok2';
+  } else {
+    fb.textContent = '❌ Қате. ' + questions[qi].exp;
+    fb.className = 'tfb show err2';
+  }
+  updateProg();
+}
+function updateProg() {
+  const p = (answeredCount / questions.length) * 100;
+  document.getElementById('tProg').style.width = p + '%';
+  document.getElementById('tProgLbl').textContent = answeredCount + ' / ' + questions.length + ' жауапталды';
+}
+function submitTest() {
+  if (answeredCount < questions.length) { alert('Барлық ' + questions.length + ' сұраққа жауап беріңіз!'); return; }
+  let score = 0;
+  for (let i = 0; i < questions.length; i++) if (userAns[i] === questions[i].ans) score++;
+  const pct = Math.round(score / questions.length * 100);
+  const grade = pct>=93?'5 ':pct>=75?'4 ':pct>=50?'3 ':'2 ';
+  const sb = document.getElementById('scoreBox');
+  sb.className = 'score-box show';
+  sb.innerHTML = `<div style="font-size:2rem;margin-bottom:8px;">${pct>=93?'':pct>=75?'':pct>=50?'':''}</div>
+    <h3>${score} / ${questions.length} дұрыс (${pct}%)</h3>
+    <p style="font-size:.95rem;opacity:.9;margin-top:5px;">Баға: ${grade}</p>`;
+  sb.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function resetTest() {
+  for (let k in userAns) delete userAns[k];
+  answeredCount = 0;
+  document.getElementById('scoreBox').className = 'score-box';
+  updateProg();
+  buildTest();
+}
+buildTest();
+
+// GLOSSARY
+const glossData = [
+  {t:'Үшбұрыш', d:'Бір түзуде жатпайтын үш нүктені жалғастыратын үш кесіндіден тұратын геометриялық фигура.'},
+  {t:'Теңқабырғалы үшбұрыш', d:'Үш қабырғасы да тең үшбұрыш. Барлық бұрышы 60°.'},
+  {t:'Теңбүйірлі үшбұрыш', d:'Екі қабырғасы тең үшбұрыш. Тең қабырғалар — бүйір, үшіншісі — негіз.'},
+  {t:'Тікбұрышты үшбұрыш', d:'Бір бұрышы 90°-ге тең үшбұрыш.'},
+  {t:'Сүйір бұрышты үшбұрыш', d:'Барлық бұрышы 90°-тан кіші үшбұрыш.'},
+  {t:'Доғал бұрышты үшбұрыш', d:'Бір бұрышы 90°-тан үлкен үшбұрыш.'},
+  {t:'Гипотенуза', d:'Тікбұрышты үшбұрышта тік бұрышқа қарама-қарсы жатқан ең ұзын қабырға.'},
+  {t:'Катет', d:'Тікбұрышты үшбұрышта тік бұрышты жасайтын екі қабырғаның әрқайсысы.'},
+  {t:'Медиана', d:'Үшбұрыш төбесінен қарама-қарсы қабырғасының ортасына жүргізілген кесінді. Үш медиана ауырлық орталығында қиылысады.'},
+  {t:'Биссектриса', d:'Бұрышты тең екі бөлікке бөлетін сәуле. Үш биссектриса ішкі шеңбер орталығында қиылысады.'},
+  {t:'Биіктік', d:'Үшбұрыш төбесінен қарама-қарсы қабырғасына жүргізілген перпендикуляр. Үш биіктік ортоцентрде қиылысады.'},
+  {t:'Орта сызық', d:'Үшбұрыштың екі қабырғасының ортаңғы нүктелерін жалғайтын кесінді. Үшінші қабырғаға параллель және оның жартысына тең.'},
+  {t:'Периметр', d:'Үшбұрыштың барлық қабырғалары ұзындықтарының қосындысы: P = a + b + c.'},
+  {t:'Аудан', d:'Үшбұрыш алатын жазықтық бөлігі. S = ½ · a · h.'},
+  {t:'Ауырлық орталығы', d:'Үш медиананың қиылысу нүктесі. Медианаларды 2:1 қатынасында бөледі.'},
+  {t:'Ортоцентр', d:'Үш биіктіктің қиылысу нүктесі.'},
+  {t:'Пифагор теоремасы', d:'Тікбұрышты үшбұрышта: a² + b² = c², мұнда c — гипотенуза, a, b — катеттер.'},
+  {t:'Теңдік белгілері', d:'ҚЖҚ (SAS), ҚБҚ (AAS), ҚҚҚ (SSS) — екі үшбұрыштың тең болу шарттары.'},
+  {t:'Сыртқы бұрыш', d:'Іргелес ішкі бұрышпен қосылатын бұрыш. Іргелес емес екі ішкі бұрыш қосындысына тең.'},
+  {t:'Үшбұрыш теңсіздігі', d:'Кез келген қабырға қалған екі қабырғаның қосындысынан кіші болуы тиіс: a+b>c.'},
+  {t:'Параллель', d:'Бір жазықтықта жатқан және қиылыспайтын екі түзу.'},
+  {t:'Перпендикуляр', d:'Бір-бірімен 90° бұрыш жасайтын екі сызық.'},
+  {t:'Теңбүйірлі үшбұрыш белгілері', d:'Егер екі бұрышы тең болса немесе медиана = биіктік = биссектриса болса — теңбүйірлі.'},
+];
+function renderGloss(f) {
+  const fl = (f||'').toLowerCase();
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const hi = s => fl ? s.replace(new RegExp(esc(fl),'gi'), m=>`<mark>${m}</mark>`) : s;
+  document.getElementById('gList').innerHTML = glossData
+    .filter(g => !fl || g.t.toLowerCase().includes(fl) || g.d.toLowerCase().includes(fl))
+    .map((g,i) => `<div class="gitem" id="gi${i}" onclick="togGloss(${i})">
+      <b>${hi(g.t)} <span class="garrow">▾</span></b>
+      <div class="gdesc">${hi(g.d)}</div>
+    </div>`).join('');
+}
+function togGloss(i) { document.getElementById('gi'+i).classList.toggle('open'); }
+function filterGloss(v) { renderGloss(v); }
+renderGloss();
+
+// VIDEO SLOTS
+let vSlotCount = 0;
+function addVideoSlot() {
+  const c = document.getElementById('videoSlots');
+  const id = 'vs' + (++vSlotCount);
+  const div = document.createElement('div');
+  div.style.marginBottom = '14px';
+  div.innerHTML = `
+    <div style="font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:5px;">📹 Қосымша видео ${vSlotCount}</div>
+    <div class="vurl-row">
+      <input type="text" id="${id}inp" placeholder="https://www.youtube.com/embed/VIDEO_ID" />
+      <button onclick="loadVideo('${id}')">▶ Жүктеу</button>
+      <button onclick="document.getElementById('${id}wrap').remove()" style="background:#e74c3c;">✕</button>
+    </div>
+    <div id="${id}wrap"></div>`;
+  c.appendChild(div);
+}
+function loadVideo(id) {
+  const inp = document.getElementById(id+'inp');
+  let url = inp.value.trim();
+  if (!url) { alert('URL енгізіңіз'); return; }
+  // Convert youtu.be and watch?v= formats to embed
+  url = url.replace('https://youtu.be/', 'https://www.youtube.com/embed/');
+  url = url.replace('watch?v=', 'embed/');
+  const wrap = document.getElementById(id+'wrap');
+  wrap.innerHTML = `<div style="border-radius:12px;overflow:hidden;border:2px solid var(--border);margin-top:6px;">
+    <iframe src="${url}" width="100%" height="320" frameborder="0" allowfullscreen loading="lazy" style="display:block;"></iframe>
+  </div>`;
+}
+</script>
+</body>
+</html>
